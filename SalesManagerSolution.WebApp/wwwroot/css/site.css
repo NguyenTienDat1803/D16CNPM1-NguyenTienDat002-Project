@@ -1,0 +1,50 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+#step-aside a {
+    color: #3f4254;
+}
+
+.stepper-icon-active {
+    border: 2px solid #2799e3;
+}
+
+.stepper-number-active {
+    color: #fff !important;
+}
+
+.stepper-title-active {
+    color: #2799e3 !important;
+}
+
+input[type=password].error, input[type=date].error, select.error, input[type=file].error, input[type=radio].error {
+    border: red 1px solid;
+}
+
+.description-title {
+    margin-bottom: .5rem;
+}
+
+.errorMessage {
+    color: red;
+}

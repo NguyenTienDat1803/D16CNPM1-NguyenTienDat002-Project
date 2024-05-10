@@ -1,0 +1,43 @@
+﻿@using SalesManagerSolution.Core.ViewModels.RequestViewModels.Authentications
+@model RegisterRequestViewModel
+
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Register";
+}
+
+<section class="bg0 p-t-104 p-b-116">
+	<div class="container">
+		<div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
+			<form asp-action="Register" asp-controller="Account" method="post" class="login100-form validate-form">
+				<h4 class="mtext-105 cl2 txt-center p-b-30">
+					Login
+				</h4>
+
+				<div class="bor8 m-b-20 how-pos4-parent">
+					<input asp-for="Email" class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="email" placeholder="User Name">
+				</div>
+
+				<div class="bor8 m-b-30">
+					<input asp-for="Password" class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="password" name="password" placeholder="Password">
+				</div>
+
+				<div class="bor8 m-b-20 how-pos4-parent">
+					<input asp-for="FirstName" class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="firstname" placeholder="First Name">
+				</div>
+
+				<div class="bor8 m-b-30">
+					<input asp-for="LastName" class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="lastname" placeholder="Last Name">
+				</div>
+
+				<div class="bor8 m-b-30">
+					<input asp-for="PhoneNumber" class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="phonenumber" placeholder="Phone Number">
+				</div>
+
+				<button class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
+					Submit
+				</button>
+			</form>
+		</div>
+	</div>
+</section>

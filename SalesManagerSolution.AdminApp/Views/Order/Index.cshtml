@@ -1,0 +1,157 @@
+﻿@using SalesManagerSolution.Core.ViewModels.Common;
+@model PagedResult<SalesManagerSolution.Core.ViewModels.ResponseViewModels.Orders.OrderResponseViewModel>
+
+@{
+    ViewData["Title"] = "Danh sách đơn hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts{
+    <script>
+        setTimeout(function () {
+            $('#msgAlert').fadeOut('slow');
+        }, 2000);
+    </script>
+}
+<div class="container-fluid">
+    <h1 class="mt-4">Danh sách đơn hàng</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+        <li class="breadcrumb-item active">Danh sách đơn hàng</li>
+    </ol>
+    <div class="card mb-12">
+        <div class="card-header">
+            <div class="row">
+                @*<div class="col-md-6 col-xs-12">
+                    <a class="btn btn-success" asp-action="Create" asp-controller="Order">Tạo mới</a>
+                </div>*@
+                <div class="col-md-6 col-xs-12">
+                    <form asp-action="Index" method="get">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <input type="text" value="@ViewBag.Keyword" name="keyword" class="form-control" />
+                            </div>
+                            <div class="col-md-4">
+                                <select name="categoryId" onchange="this.form.submit()" asp-items="@ViewBag.Categories" class="form-control">
+                                    <option>--Chọn danh mục--</option>
+                                </select>
+                            </div>
+                            <div class="cold-md-3">
+                                <button type="submit" class="btn btn-primary">Tìm</button>
+                                <button type="button" onclick="window.location.href='/Order/Index'" class="btn btn-dark">Reset</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                @if (ViewBag.SuccessMsg != null)
+                {
+                    <div id="msgAlert" class="alert alert-success" role="alert">
+                        @ViewBag.SuccessMsg
+                    </div>
+                }
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                Order Id
+                            </th>
+                            <th>
+                                User Id
+                            </th>
+                            <th>
+                                Shipping Address
+                            </th>
+                            <th>
+                                Shipping Name
+                            </th>
+                            <th>
+                                Shipping Email
+                            </th>
+                            <th>
+                                Total Product
+                            </th>
+                            <th>
+                                Total Price
+                            </th>
+                            <th>
+                                Status
+                            </th>
+                            @*<th></th>*@
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Items != null)
+                        {
+                            @foreach (var item in Model.Items)
+                            {
+                                var status = string.Empty;
+
+                                if (item.Status == SalesManagerSolution.Domain.Enums.OrderStatus.InProgress)
+                                {
+                                    status = "InProgress";
+                                }
+
+                                if (item.Status == SalesManagerSolution.Domain.Enums.OrderStatus.Confirmed)
+                                {
+                                    status = "Confirmed";
+                                }
+
+                                if (item.Status == SalesManagerSolution.Domain.Enums.OrderStatus.Shipping)
+                                {
+                                    status = "Shipping";
+                                }
+
+                                if (item.Status == SalesManagerSolution.Domain.Enums.OrderStatus.Success)
+                                {
+                                    status = "Success";
+                                }
+
+                                if (item.Status == SalesManagerSolution.Domain.Enums.OrderStatus.Canceled)
+                                {
+                                    status = "Canceled";
+                                }
+
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UserId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ShipAddress)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ShipName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ShipEmail)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TotalProduct)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TotalPrice)
+                                    </td>
+                                    <td>
+                                        @status
+                                    </td>
+                                  @*  <td>
+                                        @Html.ActionLink("Cập nhật trạng thái", "Edit", new { id = item.Id })
+                                    </td>*@
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+            @await Component.InvokeAsync("Pager", Model)
+        </div>
+    </div>
+</div>
